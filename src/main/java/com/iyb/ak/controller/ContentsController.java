@@ -4,11 +4,16 @@ import com.iyb.ak.entity.Contents;
 import com.iyb.ak.service.ContentsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,9 +32,14 @@ public class ContentsController {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Contents> getContents() throws Exception {
-        if (1 == 1) {
-//            throw new Exception();
-        }
+
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+                .getRequest();
+
+        System.out.println(request.getHeader("x-token"));
+        System.out.println(request.getHeader("Cookie"));
+
+        Cookie[] cookies = request.getCookies();
 
         Contents content = new Contents();
         content.setContent("admin801122+test11");

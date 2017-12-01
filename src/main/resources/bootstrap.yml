@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: sc-mars
+  profiles:
+    active: test
+  cloud:
+    config:
+      uri: http://localhost:9999
+      profile: dev,test,pre,prd
+
+management:
+  security:
+    enabled: false
+
+#---
+#spring.profiles:  test,pre
+#spring.cloud.config.uri: http://127.0.0.0:9999
