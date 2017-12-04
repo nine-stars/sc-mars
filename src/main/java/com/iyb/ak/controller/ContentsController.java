@@ -33,10 +33,6 @@ public class ContentsController {
     @Autowired
     ContentsService sysPermissionService;
 
-    @Value("${sc.galaxy.name}")
-    String name;
-
-
     @RequestMapping(method = RequestMethod.GET)
     public List<Contents> getContents() throws Exception {
 
@@ -58,7 +54,6 @@ public class ContentsController {
     public Contents getContentById(@PathVariable("id") Integer id) throws Exception {
 
         Contents content = new Contents();
-        content.setContent(name);
         return Arrays.asList(content).get(0);
 //        return sysPermissionService.getContents();
     }
