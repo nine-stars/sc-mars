@@ -4,6 +4,8 @@ import com.iyb.ak.entity.Contents;
 import com.iyb.ak.service.ContentsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,8 @@ import java.util.List;
  * Created by zhangshukang on 2017/11/9.
  */
 
+
+@RefreshScope
 @RestController
 @Slf4j
 @RequestMapping(value = "/content")
@@ -28,6 +32,9 @@ public class ContentsController {
 
     @Autowired
     ContentsService sysPermissionService;
+
+    @Value("${sc.galaxy.name}")
+    String name;
 
 
     @RequestMapping(method = RequestMethod.GET)
@@ -49,12 +56,9 @@ public class ContentsController {
 
     @RequestMapping(value ="/{id}",method = RequestMethod.GET)
     public Contents getContentById(@PathVariable("id") Integer id) throws Exception {
-        if (1 == 1) {
-//            throw new Exception();
-        }
 
         Contents content = new Contents();
-        content.setContent("admin801122+test11");
+        content.setContent(name);
         return Arrays.asList(content).get(0);
 //        return sysPermissionService.getContents();
     }
