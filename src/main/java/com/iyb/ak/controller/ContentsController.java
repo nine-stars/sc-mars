@@ -16,6 +16,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class ContentsController {
     ContentsService sysPermissionService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Contents> getContents() throws Exception {
+    public List<Contents> getContents(HttpServletResponse response) throws Exception {
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
@@ -46,6 +47,8 @@ public class ContentsController {
 
         Contents content = new Contents();
         content.setContent("admin801122+test11");
+
+        response.setHeader("admin","admin");
         return Arrays.asList(content);
 //        return sysPermissionService.getContents();
     }
