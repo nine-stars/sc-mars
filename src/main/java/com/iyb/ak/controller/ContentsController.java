@@ -1,6 +1,8 @@
 package com.iyb.ak.controller;
 
 import com.iyb.ak.entity.Contents;
+import com.iyb.ak.exception.BaseException;
+import com.iyb.ak.exception.NotFoundException;
 import com.iyb.ak.service.ContentsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,11 @@ public class ContentsController {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Contents> getContents(HttpServletResponse response) throws Exception {
+
+
+        if (1 == 1) {
+            throw new NotFoundException(BaseException.ERR_9996, this);
+        }
 
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
